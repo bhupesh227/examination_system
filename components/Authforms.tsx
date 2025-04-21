@@ -90,7 +90,7 @@ const Authforms = ({type}:{type:FormType}) => {
                     idToken,
                 })
                 toast.success("Logged In successfully");
-                router.push("/");
+                
             }
         } catch (error) {
             console.log(error);

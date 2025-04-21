@@ -11,3 +11,11 @@ interface LogInParams{
     email: string;
     idToken: string;
 }
+
+interface User {
+    id: string;
+    name: string;
+    email: string;
+    createdAt: string;
+    authProvider: string;
+}
