@@ -9,23 +9,28 @@ import FormField from './FormField'
 import Image from 'next/image'
 import Link from 'next/link'
 import { toast } from "sonner"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/firebase/client'
+import { LogInUser, SignUpUser } from '@/lib/actions/auth.action'
+import { useRouter } from 'next/navigation'
 
 
 const authFormSchema =(type:FormType)=>{
-    return z.object({
-        username: z.string().min(2).max(50),
+    return (z.object({
+        username: type ==='SignUp'? z.string().min(5,"minimun 5 chracters"):z.string().optional(),
         email: z.string().email().min(5).max(50),
         password: z.string().min(8).max(50),
-        confirmPassword: z.string().min(8).max(50),
+        confirmPassword: type ==='SignUp'? z.string().min(8).max(50): z.string().optional(),
     })
     .refine((data) => {
         if (type === "LogIn") return true
         return data.password === data.confirmPassword
     }, {
         message: "Passwords don't match",
-    })
+    }))
 }
 const Authforms = ({type}:{type:FormType}) => {
+    const router = useRouter();
     const formSchema = authFormSchema(type)
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -38,12 +43,58 @@ const Authforms = ({type}:{type:FormType}) => {
     })
 
     const LogIn = type === "LogIn"
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            
+            if (type === "SignUp") {
+                const  { username, email, password } = values;
+                const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+                const result = await SignUpUser({
+                    uid: userCredentials.user.uid,
+                    username: username!,
+                    email,
+                    password,
+                })
+                if (!result?.success) {
+                    toast.error(result?.message)
+                }
+                toast.success("Sign Up Successful")
+                router.push("/sign-in")
+            }else{
+                const {email, password} = values;
+                let userCredentials;
+                try {
+                    userCredentials = await signInWithEmailAndPassword(auth, email, password);
+                } catch (error: any) {
+                    if (error.code === "auth/invalid-credential") 
+                    {
+                        toast.error("Invalid credentials");
+                        return;
+                        
+                    }
+                    else if(error.code === "auth/user-not-found")
+                    {
+                        toast.error("User does not exist");
+                        return;
+                    }
+                    toast.error(error.message || "Failed to LogIn");
+                    return;
+                }
+                const idToken = await userCredentials.user.getIdToken();
+                if(!idToken){
+                    toast.error("Failed to LogIn")
+                    return;
+                }
+
+                await LogInUser({
+                    email,
+                    idToken,
+                })
+                toast.success("Logged In successfully");
+                router.push("/");
+            }
         } catch (error) {
             console.log(error);
-            toast.error(`There was an error: ${error}`)
+            toast.error(`${error}`)
         }
     }
   return (
