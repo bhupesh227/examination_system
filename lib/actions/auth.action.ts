@@ -15,12 +15,14 @@ export async function SignUpUser(data: SignUpParams){
             }
         }
         const avatarURL = "/avatardefault.jpg";
+        const role = "student";
         await db.collection("users").doc(uid).set({
             username,
             email,
             createdAt: new Date().toISOString(),
             authProvider: password ? "local": "google",
             avatarURL,
+            role,
         });
         return {
             success: true,

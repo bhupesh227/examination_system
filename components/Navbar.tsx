@@ -4,13 +4,21 @@ import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, NavbarButto
 import { usePathname, useRouter } from 'next/navigation';
 import { LogOutSession } from '@/lib/actions/auth.action';
 import { toast } from 'sonner';
-import { navigationItems } from '@/constants';
+
 import Avatars from './Avatars';
+import { adminNavItems, studentNavItems, teacherNavItems } from '@/constants';
 
 
 
-const Navbar = ({user}:{user:User}) => {
-    const navItems = navigationItems;
+const Navbar = ({user}:{user:UserInfo}) => {
+    const navItems =
+      user.role === "student"
+          ? studentNavItems
+          : user.role === "admin"
+              ? adminNavItems
+              : user.role === "teacher"
+                  ? teacherNavItems
+                  : [];
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
     const router = useRouter();

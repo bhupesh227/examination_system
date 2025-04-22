@@ -1,14 +1,17 @@
-export const navigationItems = [
-    {
-      name: "Features",
-      link: "/features",
-    },
-    {
-      name: "Pricing",
-      link: "#pricing",
-    },
-    {
-      name: "Contact",
-      link: "#contact",
-    },
+
+export const studentNavItems = [
+  { name: "All Exam", link: "/exams" },
+  { name: "Generate", link: "/generate" },
+  { name: "About", link: "/about" }
+];
+
+export const adminNavItems = [
+  {name: "Admin Dashboard", link: "/admin-dashboard"},
+  { name: "Add Question", link: "/add-question" }
+];
+
+export const teacherNavItems = [
+  { name: "Teacher Dashboard", link: "/teacher-dashboard" },
+  { name: "Manage Exams", link: "/manage-exams" },
+  { name: "Grades", link: "/grades" }
 ];

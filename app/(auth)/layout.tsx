@@ -14,7 +14,7 @@ const layout = async({children}:{children:ReactNode}) => {
   }
   return (
     <div className='login-bg'>
-      <Navbar user={{id:"", username:"", avatarURL:"",email:"",createdAt:"",authProvider:""}}/>
+      <Navbar user={{id:"", username:"", avatarURL:"",role:""}}/>
       <div className='auth-layout pt-15'>
         {children}
       </div>

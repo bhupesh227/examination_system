@@ -1,24 +1,39 @@
 import { Button } from '@/components/ui/button'
+import { getCurrentUser } from '@/lib/actions/auth.action'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-const page = () => {
-  
+const page = async() => {
+  const user = await getCurrentUser();
+  let startLink = "/AllExams";
+  let dynamicDescription = "Create, assign, and manage exams effortlessly with real-time analytics.";
+  if (user) {
+    if (user.role === "teacher") {
+      startLink = "/teacher-dashboard";
+      dynamicDescription = "Create, assign, and manage exams effortlessly with real-time analytics.";
+    } else if (user.role === "admin") {
+      startLink = "/admin-dashboard"; 
+      dynamicDescription = "Manage users and oversee the examination process.";
+    } else if (user.role === "student") {
+      startLink = "/AllExams";
+      dynamicDescription = "Take exams and track your progress.";
+    }
+  }
   return (
     <>
       <main className="container mx-auto px-4 py-8">
         <section className="card-cta flex-col md:flex-row text-center mb-16 mt-10 pb-10 gap-5">
           <div className='flex flex-col justify-center items-center gap-4 md:gap-2'>
             <h1 className="text-5xl font-bold mb-4 text-orange-400">
-              Welcome to Online Examination System
+              Hi {user?.username} <br/> <span className='text-3xl font-bold text-orange-200'> Welcome to Online Examination System</span>
             </h1>
-            <p className="text-xl text-amber-300 mb-8">
-              Create, assign, and manage exams effortlessly with real-time analytics.
+            <p className="text-xl text-amber-200 mb-8">
+              {dynamicDescription}
             </p>
             <div className="space-x-4">
               <Button variant="outline" size="lg">
-                <Link href={"/allExams"}>
+                <Link href={startLink}>
                   Get Started
                 </Link>
               </Button>

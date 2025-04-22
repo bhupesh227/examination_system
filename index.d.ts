@@ -19,4 +19,12 @@ interface User {
     createdAt: string;
     authProvider: string;
     avatarURL: string;
+    role: string;
+}
+
+interface UserInfo{
+    id: string;
+    username: string;
+    role: string;
+    avatarURL: string;
 }
