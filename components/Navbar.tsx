@@ -5,9 +5,11 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LogOutSession } from '@/lib/actions/auth.action';
 import { toast } from 'sonner';
 import { navigationItems } from '@/constants';
+import Avatars from './Avatars';
 
 
-const Navbar = () => {
+
+const Navbar = ({user}:{user:User}) => {
     const navItems = navigationItems;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
@@ -46,7 +48,7 @@ const Navbar = () => {
                 </>
             ):(
                 <>
-                    <NavbarButton variant="primary">Book a call</NavbarButton>
+                    <Avatars userId={user.id} userName={user.username} currentAvatar={user.avatarURL}/>
                     <NavbarButton variant="destructive" disabled={isLoading} onClick={handleLogOut}>LogOut</NavbarButton>
                 </>
             )}
@@ -58,10 +60,14 @@ const Navbar = () => {
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
-            <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
+            <div className="flex items-center gap-6">
+              <Avatars userId={user.id} userName={user.username} currentAvatar={user.avatarURL}/>
+              <MobileNavToggle
+                isOpen={isMobileMenuOpen}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              />
+            </div>
+            
           </MobileNavHeader>
  
           <MobileNavMenu
@@ -90,7 +96,6 @@ const Navbar = () => {
                 </>
               ):(
                 <>
-                    <NavbarButton variant="primary" className='w-full' onClick={() => setIsMobileMenuOpen(false)}>Book a call</NavbarButton>
                     <NavbarButton variant="destructive" disabled={isLoading} className='w-full' onClick={handleLogOut}>LogOut</NavbarButton>
                 </>
               )}

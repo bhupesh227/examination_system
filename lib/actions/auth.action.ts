@@ -2,6 +2,7 @@
 
 import { auth, db } from "@/firebase/admin";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function SignUpUser(data: SignUpParams){
     const {uid ,username, email, password} = data;
@@ -13,11 +14,13 @@ export async function SignUpUser(data: SignUpParams){
                 message: "User already exists"
             }
         }
+        const avatarURL = "/avatardefault.jpg";
         await db.collection("users").doc(uid).set({
             username,
             email,
             createdAt: new Date().toISOString(),
             authProvider: password ? "local": "google",
+            avatarURL,
         });
         return {
             success: true,
@@ -130,4 +133,13 @@ export async function LogOutSession() {
     path: "/",
     sameSite: "lax",
   });
+}
+
+
+export async function requireUser(): Promise<User> {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect("/sign-in"); 
+  }
+  return user;
 }

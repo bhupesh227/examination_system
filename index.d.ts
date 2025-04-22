@@ -14,8 +14,9 @@ interface LogInParams{
 
 interface User {
     id: string;
-    name: string;
+    username: string;
     email: string;
     createdAt: string;
     authProvider: string;
+    avatarURL: string;
 }
