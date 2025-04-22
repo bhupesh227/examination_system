@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 
 
+
 const monaSans = Mona_Sans({
   variable: "--font-mona-sans",
   subsets: ["latin"],
@@ -22,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${monaSans.className}antialiased `}
+        className={`${monaSans.className}antialiased`}
       >
         {children}
         <Toaster duration={2000} richColors position="bottom-right" />

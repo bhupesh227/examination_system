@@ -3,6 +3,8 @@ import React, { ReactNode } from 'react'
 import { isAuthenticated } from '@/lib/actions/auth.action';
 import { redirect } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+
 
 
 const layout = async({children}:{children:ReactNode}) => {
@@ -12,11 +14,11 @@ const layout = async({children}:{children:ReactNode}) => {
   }
   return (
     <div className='login-bg'>
-      <Navbar />
+      <Navbar user={{id:"", username:"", avatarURL:"",email:"",createdAt:"",authProvider:""}}/>
       <div className='auth-layout pt-15'>
-        
         {children}
       </div>
+      <Footer />
     </div>
     
   )

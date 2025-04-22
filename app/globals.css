@@ -269,7 +269,7 @@
   }
 
   .card-cta {
-    @apply flex flex-row blue-gradient-dark rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
+    @apply flex flex-row ocean-gradient rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
   }
 
   .interviews-section {
@@ -312,11 +312,19 @@
   @apply bg-gradient-to-b from-[#4B4D4F] to-[#4B4D4F33];
 }
 
+@utility violet-gradient-gunmetal {
+  @apply bg-linear-to-r from-gray-800 via-blue-700 to-gray-900;
+}
+
+@utility ocean-gradient {
+  @apply bg-linear-to-r from-cyan-700 via-blue-700 to-indigo-900;
+}
+
 @utility login-bg {
   @apply bg-[url('/elevated-view-laptop-stationeries-blue-backdrop.jpg')] bg-top bg-no-repeat bg-cover ;
 }
-@utility login-pattern {
-  @apply bg-[url('/aibg.jpg')] bg-bottom bg-no-repeat bg-cover;
+@utility home-bg {
+  @apply bg-[url('/pattern.png')] bg-bottom bg-no-repeat bg-cover;
 }
 
 @utility blue-gradient-dark {
