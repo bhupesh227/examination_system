@@ -14,7 +14,7 @@ interface FormFieldProps <T extends FieldValues> {
     name:  Path<T>;
     label: string;
     placeholder?: string;
-    type?: "text" | "email" | "password";
+    type?: "text" | "email" | "password" | "number" | "date" | "file" | "select" | "checkbox" | "radio";
     description?: string;
 }
 
@@ -24,7 +24,7 @@ const FormField = <T extends FieldValues>({
     label,
     placeholder,
     type = "text",
-    description = "This is a description for the field",
+    description = "",
 }:FormFieldProps<T>) => {
     const [showDescription, setShowDescription] = React.useState(false);
     const wrapperRef = React.useRef<HTMLDivElement>(null);

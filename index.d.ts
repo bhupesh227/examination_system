@@ -28,3 +28,49 @@ interface UserInfo{
     role: string;
     avatarURL: string;
 }
+
+interface ExamType extends Partial<User>{
+    type?: 'teacher' | 'admin';
+
+}
+interface ExamFormInfo{
+    userId: string;
+    title: string;
+    description: string;
+    duration: number;
+    totalMarks: number;
+    passingMarks: number;
+    questions: Question[];
+    role: string;
+    
+}
+
+interface ExamFormInfoProps{
+    id: string;
+    userId: string;
+    title: string;
+    description: string;
+    duration: number;
+    totalMarks: number;
+    passingMarks: number;
+    questions: Question[];
+    role: string;
+    createdAt: string;
+}
+interface ExamCardProps{
+    examId: string;
+    userId: string;
+    title: string;
+    description: string;
+    duration: number;
+    totalMarks: number;
+    passingMarks: number;
+    questions: Question[];
+    createdAt: string;
+    role: string;
+}
+interface teacherDashboardProps{
+    createdExam: ExamFormInfoProps[];
+    user : User | null;
+}
+

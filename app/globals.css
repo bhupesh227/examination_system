@@ -188,6 +188,10 @@
     @apply border-gradient p-0.5 rounded-2xl w-fit;
   }
 
+  .exam-card-border{
+    @apply dark-gradient p-0.5 rounded-2xl w-full;
+  }
+
   .card {
     @apply dark-gradient rounded-2xl min-h-full;
   }
@@ -196,7 +200,7 @@
     @apply w-full;
 
     .label {
-      @apply !text-primary-200 !font-semibold ;
+      @apply !text-primary-200 !font-bold ;
     }
 
     .input {

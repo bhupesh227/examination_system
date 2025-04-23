@@ -12,6 +12,6 @@ export const adminNavItems = [
 
 export const teacherNavItems = [
   { name: "Teacher Dashboard", link: "/teacher-dashboard" },
-  { name: "Manage Exams", link: "/manage-exams" },
+  { name: "Create Exam", link: "/create-exams" },
   { name: "Grades", link: "/grades" }
 ];

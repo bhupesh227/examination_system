@@ -20,4 +20,5 @@ export async function updateUserAvatar({
       console.error("Error updating user avatar:", error);
       return { success: false, error };
     }
-  }
+}
+
