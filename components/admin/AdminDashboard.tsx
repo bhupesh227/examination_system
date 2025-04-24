@@ -1,6 +1,5 @@
 "use server";
 import React from "react";
-import ExamCard from "./ExamCard";
 import Link from "next/link";
 import {
   getTotalStudents,
@@ -8,6 +7,7 @@ import {
   getAdminCreatedExams,
   getTeacherCreatedExams,
 } from "@/lib/actions/admin.action";
+import EditExamCard from "../EditExamCard";
 
 const AdminDashboard = async () => {
   // Fetch metrics and exam data concurrently
@@ -52,9 +52,9 @@ const AdminDashboard = async () => {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {displayedAdminExams.map((exam) => (
-                  <ExamCard
+                  <EditExamCard
                     key={exam.id}
-                    userId={exam.userId}
+                    
                     examId={exam.id}
                     title={exam.title}
                     description={exam.description}
@@ -90,9 +90,9 @@ const AdminDashboard = async () => {
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 self-center justify-center">
                 {displayedTeacherExams.map((exam) => (
-                  <ExamCard
+                  <EditExamCard
                     key={exam.id}
-                    userId={exam.userId}
+                    
                     examId={exam.id}
                     title={exam.title}
                     description={exam.description}

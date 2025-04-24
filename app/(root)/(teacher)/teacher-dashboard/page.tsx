@@ -1,5 +1,5 @@
 import React from 'react'
-import TeacherDashboard from '@/components/TeacherDashboard'
+import TeacherDashboard from '@/components/teacher/TeacherDashboard'
 import { getCurrentUser } from '@/lib/actions/auth.action'
 import { getCreatedExamsByUserId } from '@/lib/actions/exam.action';
 const page = async() => {

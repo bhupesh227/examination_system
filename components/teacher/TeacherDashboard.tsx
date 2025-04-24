@@ -1,6 +1,6 @@
 import React from 'react'
-import ExamCard from './ExamCard';
 import Link from 'next/link';
+import EditExamCard from '../EditExamCard';
 
 
 const TeacherDashboard = ({user,createdExam}:teacherDashboardProps) => {
@@ -41,9 +41,9 @@ const TeacherDashboard = ({user,createdExam}:teacherDashboardProps) => {
                 <>
                   <div className="grid grid-cols-1 sm:grid-cols-2 justify-between self-center gap-6">
                     {displayedExams.map((exam) => (
-                      <ExamCard
+                      <EditExamCard
                         key={exam.id}
-                        userId={user?.id || ''}
+                        
                         examId={exam.id}
                         title={exam.title}
                         description={exam.description}
