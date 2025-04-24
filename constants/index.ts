@@ -33,3 +33,21 @@ export const SideBarLinks = [
   },
   
 ];
+
+export const AdminSideBarLinks = [
+  {
+    text: "Admin Dashboard",
+    img: "/icons/dashboard.svg",
+    route: "/admin-dashboard",
+  },
+  {
+    text: "Add Question",
+    img: "/icons/form.svg",
+    route: "/add-question",
+  },
+  {
+    text: "AllGenerated Exams",
+    img: "/icons/allexam.svg",
+    route: "/admin-dashboard/GeneratedExams",
+  },
+]

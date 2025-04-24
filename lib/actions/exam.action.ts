@@ -41,13 +41,13 @@ export async function setExamForm(data: ExamFormInfo){
 export async function getCreatedExamsByUserId(
     userId: string
   ): Promise<ExamFormInfoProps[] | null> {
-    const interviews = await db
+    const Createdexams = await db
       .collection("createdExams")
       .where("userId", "==", userId)
       .orderBy("createdAt", "desc")
       .get();
   
-    return interviews.docs.map((doc) => ({
+    return Createdexams.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     })) as ExamFormInfoProps[];
