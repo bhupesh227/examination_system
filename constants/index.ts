@@ -12,6 +12,24 @@ export const adminNavItems = [
 
 export const teacherNavItems = [
   { name: "Teacher Dashboard", link: "/teacher-dashboard" },
-  { name: "Create Exam", link: "/create-exams" },
-  { name: "Grades", link: "/grades" }
+  { name: "About Us", link: "/About-Us" },
+];
+
+export const SideBarLinks = [
+  {
+    text: "Dashboard",
+    img: "/icons/dashboard.svg",
+    route: "/teacher-dashboard",
+  },
+  {
+    text: "Create Exam",
+    img: "/icons/form.svg",
+    route: "/teacher-dashboard/create-exams",
+  },
+  {
+    text: "Generated Exams",
+    img: "/icons/allexam.svg",
+    route: "/teacher-dashboard/GeneratedExams",
+  },
+  
 ];

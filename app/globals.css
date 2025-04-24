@@ -192,6 +192,13 @@
     @apply dark-gradient p-0.5 rounded-2xl w-full;
   }
 
+  .link{
+    @apply flex flex-row items-center justify-center gap-1 p-2;
+  }
+
+  .teacher-logo{
+    @apply flex flex-col items-center justify-center gap-1 border-2 border-primary-200/50 rounded-full p-2 blue-gradient-dark flex-1 sm:basis-1/2 w-full;
+  }
   .card {
     @apply dark-gradient rounded-2xl min-h-full;
   }
@@ -276,7 +283,7 @@
     @apply flex flex-row ocean-gradient rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4;
   }
 
-  .interviews-section {
+  .exam-section {
     @apply flex flex-wrap gap-4 max-lg:flex-col w-full items-stretch;
   }
 

@@ -116,7 +116,7 @@ const CreateExam = ({type,...user}:ExamType) => {
   };
 
   return (
-    <div className='exam-card-border md:w-1/2 py-4 px-2'>
+    <div className='exam-card-border md:w-full py-4 md:ml-8 px-2'>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit,(errors)=>{
                     Object.values(errors)
