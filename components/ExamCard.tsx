@@ -35,7 +35,7 @@ const ExamCard = async({
     <div className='card-border w-[360px] max-sm:w-full min-h-96 p-2 bg-white rounded-br-lg shadow-md'>
       <div className='card-interview'>
         <div>
-          <div className={`absolute top-0 right-0 w-fit px-4 py-2 rounded-br-lg z-10 ${roleBadgeColor}`}>
+          <div className={`absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg z-10 ${roleBadgeColor}`}>
             <p className='badge-text font-medium text-black'>{normalizedRole}</p>
             
           </div>
@@ -92,7 +92,16 @@ const ExamCard = async({
         </div>
 
         <div className='flex justify-between'>
-          duration: {duration} min
+          <div className='flex flex-row gap-2 items-center'>
+            <Image
+              src="/duration.svg"
+              width={22}
+              height={22}
+              alt="duration icon"
+            />
+            <p>{duration} min</p>
+          </div>
+          
           <Link href={`/exam/${examId}`} className='bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-all duration-200 ease-in-out'>
             <Button className='cursor-pointer'>
               Take Exam

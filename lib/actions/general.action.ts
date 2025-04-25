@@ -41,3 +41,25 @@ export async function getLatestExam(
     ...doc.data(),
   })) as ExamFormInfoProps[];
 }
+
+export async function getLatestExamForStudent(
+  params: GetLatestExamParamsStudent
+): Promise<ExamFormInfoProps[] | null> {
+  // Use environment variable with fallback to 200 if not provided
+  const defaultLimit = Number(process.env.NEXT_PUBLIC_MAX_EXAMCARD);
+  const limit = params.limit ?? defaultLimit;
+  const skip = params.skip ?? 0;
+
+  const createdExams = await db
+    .collection("createdExams")
+    .orderBy("createdAt", "desc")
+    .where("role", "in", ["Teacher", "Admin"])
+    .offset(skip) 
+    .limit(limit)
+    .get();
+
+  return createdExams.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as ExamFormInfoProps[];
+}

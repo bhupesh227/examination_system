@@ -43,7 +43,7 @@ const page = async() => {
 
   return (
     <>
-        <section className='flex flex-col gap-6 mt-8'>
+      <section className='flex flex-col gap-6 mt-8'>
         <h2>All Exam {allExam && allExam.length > 0 && 
           <span className="text-primary-200">({allExam.length})</span>
         }</h2>
@@ -54,7 +54,7 @@ const page = async() => {
         ) : (
           <p>There are no exam available</p>
         )}
-        </section>
+      </section>
     </>
   )
 }

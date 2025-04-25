@@ -82,4 +82,10 @@ interface RouteParams {
 interface GetLatestExamParams {
     userId: string;
     limit?: number;
-  }
+}
+
+interface GetLatestExamParamsStudent {
+    userId: string;
+    limit?: number;
+    skip?: number;
+}

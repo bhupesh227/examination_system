@@ -26,23 +26,3 @@ const page = async({params}:RouteParams) => {
 }
 
 export default page
-// export default async function EditExamPage({
-//   params: { id },
-// }: {
-//   params: { id: string };
-// }) {
-//   const [exam, currentUser] = await Promise.all([
-//     getExamById(id),
-//     getCurrentUser(),
-//   ]);
-
-//   if (!exam || !currentUser) notFound();
-
-//   const isAuthorized =
-//     currentUser.role === 'admin' ||
-//     (currentUser.role === 'teacher' && currentUser.id === exam.userId);
-
-//   if (!isAuthorized) redirect('/');
-
-//   return <EditExamForm examData={{...exam , CurrentRole:currentUser.role}}  />;
-// }
