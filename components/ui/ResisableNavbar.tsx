@@ -234,17 +234,19 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <Link href={'/'} className="flex items-center gap-2">
-        <Image
-            src={"/logo.svg"}
-            alt="logo"
-            width={32}
-            height={32}
-            className="rounded-full"
-        />
-        <span className="hidden sm:block text-blue-400">ExamDo</span>
-    </Link>
-    
+    <>
+      <Link href="/" className="flex items-center gap-2 cursor-pointer">
+          <Image
+              src={"/logo.svg"}
+              alt="logo"
+              width={32}
+              height={32}
+              className="rounded-full"
+              priority={true}
+          />
+          <span className="hidden sm:block text-blue-400">ExamDo</span>
+      </Link>
+    </>
   );
 };
 

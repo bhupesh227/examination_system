@@ -1,16 +1,19 @@
 
 export const studentNavItems = [
+  {name: "Home ", link: "/"},
   { name: "All Exam", link: "/exams" },
   { name: "Generate", link: "/generate" },
   { name: "About", link: "/about" }
 ];
 
 export const adminNavItems = [
+  {name: "Home ", link: "/"},
   {name: "Admin Dashboard", link: "/admin-dashboard"},
-  { name: "Add Question", link: "/add-question" }
+  { name: "About Us", link: "/About-Us" }
 ];
 
 export const teacherNavItems = [
+  {name: "Home ", link: "/"},
   { name: "Teacher Dashboard", link: "/teacher-dashboard" },
   { name: "About Us", link: "/About-Us" },
 ];
