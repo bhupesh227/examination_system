@@ -2,8 +2,7 @@
 export const studentNavItems = [
   {name: "Home ", link: "/"},
   { name: "All Exam", link: "/AllExams" },
-  { name: "Generate", link: "/generate" },
-  { name: "About", link: "/about" }
+  { name: "About Us", link: "/About-Us" }
 ];
 
 export const adminNavItems = [
