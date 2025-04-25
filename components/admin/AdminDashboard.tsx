@@ -70,7 +70,7 @@ const AdminDashboard = async () => {
               {hasMoreAdminExams && (
                 <div className="mt-4">
                   <Link
-                    href="/admin-dashboard/AdminExams"
+                    href="/admin-dashboard/AllAdminExams"
                     className="text-teal-600 hover:underline"
                   >
                     View all admin exams
@@ -108,7 +108,7 @@ const AdminDashboard = async () => {
               {hasMoreTeacherExams && (
                 <div className="mt-4">
                   <Link
-                    href="/admin-dashboard/TeacherExams"
+                    href="/admin-dashboard/AllTeacherExams"
                     className="text-teal-600 hover:underline"
                   >
                     View all teacher exams

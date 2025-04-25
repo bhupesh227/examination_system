@@ -23,8 +23,8 @@ const AdminSidebar = ({username,email}:AdminSidebarProps) => {
               <div className='mt-10 flex flex-col gap-5'>
                   {AdminSideBarLinks.map((link)=>{
                       const isSelected =
-                      link.route === '/teacher-dashboard'
-                        ? pathname === '/teacher-dashboard'
+                      link.route === '/admin-dashboard'
+                        ? pathname === '/admin-dashboard'
                         : pathname.startsWith(link.route);
   
                       return (
