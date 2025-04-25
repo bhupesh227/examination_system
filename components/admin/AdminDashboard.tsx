@@ -10,7 +10,7 @@ import {
 import EditExamCard from "../EditExamCard";
 
 const AdminDashboard = async () => {
-  // Fetch metrics and exam data concurrently
+  
   const [totalStudents, totalTeachers, adminExams, teacherExams] = await Promise.all([
     getTotalStudents(),
     getTotalTeachers(),
@@ -19,10 +19,10 @@ const AdminDashboard = async () => {
   ]);
 
   const hasMoreAdminExams = adminExams.length > 2;
-  const displayedAdminExams = adminExams.slice(0, 2); // preview first two
+  const displayedAdminExams = adminExams.slice(0, 2); 
   
   const hasMoreTeacherExams = teacherExams.length > 2;
-  const displayedTeacherExams = teacherExams.slice(0, 2); // preview first two
+  const displayedTeacherExams = teacherExams.slice(0, 2); 
 
   return (
     <div className="flex min-h-screen p-4 max-sm:p-0 flex-col gap-8">

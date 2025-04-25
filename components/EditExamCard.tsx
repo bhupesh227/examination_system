@@ -40,10 +40,7 @@ const EditExamCard = ({
   const formattedDate = dayjs(createdAt).format("MMM D, YYYY");
 
   
-  const editPath =
-    normalizedRole === "Teacher"
-      ? `/teacher-dashboard/edit-exam/${examId}`
-      : `/admin-dashboard/edit-exam/${examId}`;
+  const editPath = `/edit-exam/${examId}`;
 
   return (
     <div className="card-border w-[360px] max-sm:w-full min-h-96 p-2 bg-white rounded-lg shadow-md">
