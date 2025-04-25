@@ -22,3 +22,22 @@ export async function updateUserAvatar({
     }
 }
 
+export async function getLatestExam(
+  params: GetLatestExamParams
+): Promise<ExamFormInfoProps[] | null> {
+  // Use environment variable with fallback to 200 if not provided
+  const defaultLimit = Number(process.env.NEXT_PUBLIC_MAX_EXAMCARD);
+  const {  limit = defaultLimit } = params;
+
+  const createdExams = await db
+    .collection("createdExams")
+    .orderBy("createdAt", "desc")
+    .where("role", "in", ["Teacher", "Admin"])
+    .limit(limit)
+    .get();
+
+  return createdExams.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as ExamFormInfoProps[];
+}

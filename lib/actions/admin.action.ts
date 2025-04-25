@@ -19,6 +19,7 @@ export async function getAdminCreatedExams(): Promise<ExamFormInfoProps[]> {
     .collection("createdExams")
     .where("role", "==", "Admin")
     .orderBy("createdAt", "desc")
+    .limit(3)
     .get();
 
   return snapshot.docs.map((doc) => ({
@@ -33,6 +34,7 @@ export async function getTeacherCreatedExams(): Promise<ExamFormInfoProps[]> {
     .collection("createdExams")
     .where("role", "==", "Teacher")
     .orderBy("createdAt", "desc")
+    .limit(3)
     .get();
 
   return snapshot.docs.map((doc) => ({
