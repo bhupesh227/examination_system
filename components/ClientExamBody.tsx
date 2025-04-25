@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Timer from "./Timer";
 import { useRouter } from "next/navigation";
 
@@ -22,6 +22,50 @@ export default function ClientExamBody({
 
     const currentQuestion = questions[currentQIndex];
     const selectedAnswer = answers[currentQIndex] || "";
+
+    useEffect(() => {
+        // Fullscreen on mount
+        const el = document.documentElement;
+        if (el.requestFullscreen) {
+            el.requestFullscreen();
+        }
+
+        // Disable right-click
+        const disableRightClick = (e: MouseEvent) => e.preventDefault();
+        document.addEventListener("contextmenu", disableRightClick);
+
+        // Disable copy/paste/inspect
+        const disableKeyCombos = (e: KeyboardEvent) => {
+            if (
+                (e.ctrlKey && ["c", "v", "x", "u"].includes(e.key.toLowerCase())) || // copy, paste, cut, view source
+                (e.metaKey && ["c", "v", "x", "u"].includes(e.key.toLowerCase())) ||
+                e.key === "F12"
+            ) {
+                e.preventDefault();
+            }
+        };
+        document.addEventListener("keydown", disableKeyCombos);
+
+        // Detect tab switch or window blur
+        const onBlur = () => {
+            alert("Tab switching or minimizing is not allowed during the exam!");
+        };
+        window.addEventListener("blur", onBlur);
+
+        // Prevent back button
+        const preventBack = () => {
+            history.pushState(null, "", location.href);
+        };
+        window.addEventListener("popstate", preventBack);
+        history.pushState(null, "", location.href); // push once on load
+
+        return () => {
+            document.removeEventListener("contextmenu", disableRightClick);
+            document.removeEventListener("keydown", disableKeyCombos);
+            window.removeEventListener("blur", onBlur);
+            window.removeEventListener("popstate", preventBack);
+        };
+    }, []);
 
     const handleOptionChange = (option: string) => {
         setAnswers((prev) => ({
@@ -58,6 +102,14 @@ export default function ClientExamBody({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
+        
+        if (document.fullscreenElement) {
+            try {
+              await document.exitFullscreen();
+            } catch (err) {
+              console.warn("Could not exit fullscreen:", err);
+            }
+        } // Exit fullscreen
 
         router.push("/AllExams");
     };
