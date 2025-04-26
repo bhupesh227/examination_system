@@ -326,6 +326,10 @@
     text-align: left;
     animation: dotsAnimation 1.2s infinite steps(1);
   }
+
+  .list {
+    @apply text-dark-100 text-xl mb-1 font-semibold ;
+  }
 }
 
 @utility dark-gradient {
