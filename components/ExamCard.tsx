@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import { Button } from './ui/button'
+import { getFeedbackByExamUserId } from '@/lib/actions/feedback.action'
 
 const ExamCard = async({
     examId,
@@ -17,6 +18,14 @@ const ExamCard = async({
     createdAt,
     role
 }:ExamCardProps) => {
+  const feedback =
+    userId && examId
+      ? await getFeedbackByExamUserId({
+          examId,
+          userId,
+        })
+      : null;
+ 
   const normalizedRole = /mix/gi.test(role) ? "Student" : role;
 
   // Type badge color mapping
@@ -70,7 +79,7 @@ const ExamCard = async({
                 height={22} 
                 alt="star icon"
               />
-              <p>{  "---/"} {totalMarks}</p>
+              <p>{feedback?.totalScore || "---"}/100</p>
             </div>
             
             <div className="flex flex-row gap-2 items-center">
@@ -102,11 +111,19 @@ const ExamCard = async({
             <p>{duration} min</p>
           </div>
           
-          <Link href={`/exam/${examId}`} className='bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-all duration-200 ease-in-out'>
-            <Button className='cursor-pointer'>
-              Take Exam
-            </Button>
-            
+          <Link href={
+            feedback 
+              ?`/exam/${examId}/feedback`
+              :`/exam/${examId}`} className='bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-all duration-200 ease-in-out'>
+            {feedback ? 
+              <Button className='cursor-pointer'>
+                View Feedback
+              </Button>
+            :
+              <Button className='cursor-pointer'>
+                Take Exam
+              </Button>
+            }
           </Link>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { z } from "zod";
 
 export const studentNavItems = [
   {name: "Home ", link: "/"},
@@ -53,3 +54,28 @@ export const AdminSideBarLinks = [
     route: "/admin-dashboard/AllGeneratedExams",
   },
 ]
+
+export const userExamFeedbackSchema = z.object({
+  
+  totalScore: z.number(),
+  categoryScores: z.tuple([
+    z.object({
+      name: z.literal("Accuracy"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+    z.object({
+      name: z.literal("Clarity"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+    z.object({
+      name: z.literal("Technical Knowledge"),
+      score: z.number(),
+      comment: z.string(),
+    }),
+  ]),
+  strengths: z.array(z.string()),
+  areasForImprovement: z.array(z.string()),
+  finalAssessment: z.string(),
+});

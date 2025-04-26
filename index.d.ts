@@ -68,6 +68,7 @@ interface ExamCardProps{
     questions: Question[];
     createdAt: string;
     role: string;
+    
 }
 interface teacherDashboardProps{
     createdExam: ExamFormInfoProps[];
@@ -88,4 +89,36 @@ interface GetLatestExamParamsStudent {
     userId: string;
     limit?: number;
     skip?: number;
+}
+
+interface GetFeedbackByExamIdUserIdParams {
+    examId: string;
+    userId: string;
+}
+interface Feedback {
+    id: string;
+    examId: string;
+    totalScore: number;
+    categoryScores: Array<{
+      name: string;
+      score: number;
+      comment: string;
+    }>;
+    strengths: string[];
+    areasForImprovement: string[];
+    finalAssessment: string;
+    createdAt: string;
+}
+
+type AnswerRecord = {
+    question: string;
+    selectedAnswer: string;
+    correctAnswer: string;
+    isCorrect: boolean;
+};
+interface CreateExamFeedbackParams{
+    examId: string;
+    userId: string;
+    answers: AnswerRecord[];
+    feedbackId?: string;
 }

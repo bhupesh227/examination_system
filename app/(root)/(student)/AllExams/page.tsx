@@ -1,6 +1,6 @@
 import ExamCard from '@/components/ExamCard';
 import Pagination from '@/components/Pagination';
-import { getCurrentUser } from '@/lib/actions/auth.action';
+import {requireUser } from '@/lib/actions/auth.action';
 import { getLatestExamForStudent } from '@/lib/actions/general.action';
 
 import React from 'react';
@@ -14,7 +14,7 @@ const page = async({ searchParams }: PageProps) => {
     
     const limit = 6;
     const skip = (currentPage - 1) * limit;
-    const user = await getCurrentUser();
+    const user = await requireUser();
 
     const examResult = await getLatestExamForStudent({
         userId: user?.id || '',

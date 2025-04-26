@@ -320,6 +320,10 @@
     }
   }
 
+  .section-feedback {
+    @apply flex flex-col gap-8 max-w-5xl mx-auto max-sm:px-4 text-lg leading-7;
+  }
+  
   .dots{
     display: inline-block;
     width: 30px;
