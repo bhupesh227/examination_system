@@ -29,12 +29,12 @@ const EditExamCard = ({
   role,
 }: EditExamCardProps) => {
   // Normalize role for display
-  const normalizedRole = /mix/gi.test(role) ? "Student" : role;
+  const normalizedRole = /mix/gi.test(role) ? "student" : role;
   const roleBadgeColor =
     {
-      Student: "bg-light-800",
-      Teacher: "bg-yellow-200",
-      Admin: "bg-blue-200",
+      student: "bg-light-800",
+      teacher: "bg-yellow-200",
+      admin: "bg-blue-200",
     }[normalizedRole] || "bg-violet-600";
 
   const formattedDate = dayjs(createdAt).format("MMM D, YYYY");

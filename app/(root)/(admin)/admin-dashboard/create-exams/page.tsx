@@ -6,7 +6,7 @@ const page = async() => {
     const user = await getCurrentUser();
   return (
     <div className='flex flex-col items-center justify-center mt-5'>
-        <CreateExam type='teacher' {...user}/>
+        <CreateExam type='admin' {...user}/>
     </div>
   )
 }

@@ -13,9 +13,9 @@ import { useRouter } from 'next/navigation';
 type ExamForm = z.infer<typeof examSchema>;
 
 const examSchema = z.object({
-  title: z.string().min(1, "Title is required"),
-  description: z.string().min(1, "Description is required"),
-  duration: z.coerce.number().min(1, "Duration must be greater than 0"),
+  title: z.string().min(5, "Title should be greater than 5"),
+  description: z.string().min(10, "Description should be greater than 10"),
+  duration: z.coerce.number().min(5, "Duration must be greater than 5 minutes"),
   totalMarks: z.coerce.number().min(1, "Total marks must be greater than 0"),
   passingMarks: z.coerce.number().min(1, "Passing marks must be greater than 0"),
   questions: z.array(z.object({
@@ -24,6 +24,9 @@ const examSchema = z.object({
               message: "Options must be unique",
             }),
     answer: z.string().min(1, "Answer is required"),
+  }).refine((q) => q.options.includes(q.answer), {
+    message: "Answer must be one of the provided options",
+    path: ["answer"], 
   })),
   role: z.string().optional(),
 });
@@ -36,7 +39,7 @@ const CreateExam = ({type,...user}:ExamType) => {
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
   
-  console.log("user",user)
+  
   const form = useForm<ExamForm>({
     resolver: zodResolver(examSchema),
     defaultValues: {
@@ -46,7 +49,7 @@ const CreateExam = ({type,...user}:ExamType) => {
       totalMarks: 0,
       passingMarks: 0,
       questions: [],
-      role: type === 'admin' ? 'Admin' : 'Teacher',
+      role: type === 'admin' ? 'admin' : 'teacher',
       
     },
   });
@@ -87,11 +90,16 @@ const CreateExam = ({type,...user}:ExamType) => {
       const result = await setExamForm({
         ...values,
         userId: user?.id ?? "",
-        role: type === 'admin' ? 'Admin' : 'Teacher',
+        role: type === 'admin' ? 'admin' : 'teacher',
       });
       console.log("Exam created:", values);
       toast.success(result?.message || "Exam created successfully");
-      router.push("/teacher-dashboard")
+      if(type === 'admin'){
+        router.push("/admin-dashboard")
+      }
+      else if(type === 'teacher'){
+        router.push("/teacher-dashboard")
+      }
     } catch (error) {
       toast.error("Failed to create exam");
       console.error("Error creating exam:", error);

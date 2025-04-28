@@ -17,7 +17,7 @@ export async function getTotalTeachers(): Promise<number> {
 export async function getAdminCreatedExams(): Promise<ExamFormInfoProps[]> {
   const snapshot = await db
     .collection("createdExams")
-    .where("role", "==", "Admin")
+    .where("role", "==", "admin")
     .orderBy("createdAt", "desc")
     .limit(3)
     .get();
@@ -32,7 +32,7 @@ export async function getAdminCreatedExams(): Promise<ExamFormInfoProps[]> {
 export async function getTeacherCreatedExams(): Promise<ExamFormInfoProps[]> {
   const snapshot = await db
     .collection("createdExams")
-    .where("role", "==", "Teacher")
+    .where("role", "==", "teacher")
     .orderBy("createdAt", "desc")
     .limit(3)
     .get();

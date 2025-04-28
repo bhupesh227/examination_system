@@ -32,7 +32,7 @@ export async function getLatestExam(
   const createdExams = await db
     .collection("createdExams")
     .orderBy("createdAt", "desc")
-    .where("role", "in", ["Teacher", "Admin"])
+    .where("role", "in", ["teacher", "admin"])
     .limit(limit)
     .get();
 
@@ -53,7 +53,7 @@ export async function getLatestExamForStudent(
   const createdExams = await db
     .collection("createdExams")
     .orderBy("createdAt", "desc")
-    .where("role", "in", ["Teacher", "Admin"])
+    .where("role", "in", ["teacher", "admin"])
     .offset(skip) 
     .limit(limit)
     .get();

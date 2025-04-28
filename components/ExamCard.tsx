@@ -26,14 +26,14 @@ const ExamCard = async({
         })
       : null;
  
-  const normalizedRole = /mix/gi.test(role) ? "Student" : role;
+  const normalizedRole = /mix/gi.test(role) ? "student" : role;
 
   // Type badge color mapping
   const roleBadgeColor =
     {
-      Student: "bg-light-800",
-      Teacher: "bg-yellow-200",
-      Admin: "bg-blue-200",
+      student: "bg-light-800",
+      teacher: "bg-yellow-200",
+      admin: "bg-blue-200",
     }[normalizedRole] || "bg-violet-600";
 
 
