@@ -69,7 +69,9 @@ const Navbar = ({user}:{user:UserInfo}) => {
           <MobileNavHeader>
             <NavbarLogo />
             <div className="flex items-center gap-6">
-              <Avatars userId={user.id} userName={user.username} currentAvatar={user.avatarURL}/>
+              {!isAuthPage &&(
+                <Avatars userId={user.id} userName={user.username} currentAvatar={user.avatarURL}/>
+              )}
               <MobileNavToggle
                 isOpen={isMobileMenuOpen}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
