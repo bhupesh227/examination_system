@@ -1,4 +1,4 @@
-import ExamCard from '@/components/ExamCard';
+import EditExamCard from '@/components/EditExamCard';
 import { getCurrentUser } from '@/lib/actions/auth.action';
 import { getCreatedExamsByUserId } from '@/lib/actions/exam.action';
 import React from 'react'
@@ -13,9 +13,8 @@ const page = async() => {
     <div className='grid grid-cols-1 sm:grid-cols-2 justify-between self-center gap-6 mb-8'>
         {hasPastCreatedExams?(
                 createdExam?.map((exam)=>(
-                  <ExamCard 
+                  <EditExamCard
                     key={exam.id}
-                    userId={user?.id || ''}
                     examId={exam.id}
                     title={exam.title}
                     description={exam.description}
