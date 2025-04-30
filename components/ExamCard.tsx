@@ -5,6 +5,7 @@ import Link from 'next/link'
 import dayjs from 'dayjs'
 import { Button } from './ui/button'
 import { getFeedbackByExamUserId } from '@/lib/actions/feedback.action'
+import { getSubmissionByExamUserId } from '@/lib/actions/submittedExam.action'
 
 const ExamCard = async({
     examId,
@@ -20,12 +21,15 @@ const ExamCard = async({
 }:ExamCardProps) => {
   const feedback =
     userId && examId
-      ? await getFeedbackByExamUserId({
-          examId,
-          userId,
-        })
+      ? await getFeedbackByExamUserId({ examId, userId,})
       : null;
  
+
+  const submission = userId && examId
+    ? await getSubmissionByExamUserId({ examId, userId })
+    : null;
+
+
   const normalizedRole = /mix/gi.test(role) ? "student" : role;
 
   // Type badge color mapping
@@ -42,7 +46,7 @@ const ExamCard = async({
     ).format("MMM D, YYYY");
   return (
     <div className='card-border w-[360px] max-sm:w-full min-h-96 p-2 bg-white rounded-br-lg shadow-md'>
-      <div className='card-interview'>
+      <div className='card-exam'>
         <div>
           <div className={`absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg z-10 ${roleBadgeColor}`}>
             <p className='badge-text font-medium text-black'>{normalizedRole}</p>
@@ -59,7 +63,7 @@ const ExamCard = async({
             height={90}
             className="rounded-lg w-full object-cover mt-6 mx-auto"
           />
-          <h3 className="my-5 capitalize">{title} </h3>
+          <h3 className="my-5 capitalize text-center">{title} </h3>
 
           <div className="flex flex-row flex-wrap gap-5 mt-3">
             <div className="flex flex-row gap-2">
@@ -94,14 +98,8 @@ const ExamCard = async({
               </p>
             </div>
           </div>
-          <p className="line-clamp-2 mt-5">
-            {
-              "You haven't taken this Exam yet. Take it now to improve your skills."}
-          </p>
-        </div>
 
-        <div className='flex justify-between'>
-          <div className='flex flex-row gap-2 items-center'>
+          <div className='flex flex-row gap-2 justify-center items-center mt-2'>
             <Image
               src="/duration.svg"
               width={22}
@@ -110,21 +108,40 @@ const ExamCard = async({
             />
             <p>{duration} min</p>
           </div>
-          
-          <Link href={
-            feedback 
-              ?`/exam/${examId}/feedback`
-              :`/exam/${examId}`} className='bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-all duration-200 ease-in-out'>
-            {feedback ? 
-              <Button className='cursor-pointer'>
-                View Feedback
-              </Button>
-            :
-              <Button className='cursor-pointer'>
-                Take Exam
-              </Button>
-            }
-          </Link>
+
+          <p className="line-clamp-2 mt-2 text-center">
+            {feedback ?(
+              <span className='text-teal-600 font-semibold'>ou haven&apos;t taken this Exam yet. Take it now to improve your skills.</span>
+            ) : (
+              <span className='text-teal-600 font-semibold'>{description}</span>
+            )}
+          </p>
+        </div>
+
+        <div className='flex justify-center items-center mt-3 cursor-pointer'>
+          {submission && feedback ? (
+            <div className="flex justify-center items-center gap-2">
+              <Link
+                href={`/exam/${examId}/feedback`}
+                className="bg-teal-600 text-white p-1 rounded-lg hover:bg-teal-700 transition-all duration-200 ease-in-out"
+              >
+                <Button className="cursor-pointer">View Feedback</Button>
+              </Link>
+              <Link
+                href={`/exam/${examId}/result`}
+                className="bg-green-600 text-white p-1 rounded-lg hover:bg-green-700 transition-all duration-200 ease-in-out"
+              >
+                <Button className="cursor-pointer">View Result</Button>
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href={`/exam/${examId}`}
+              className="bg-teal-600 text-white p-1 rounded-lg hover:bg-teal-700 transition-all duration-200 ease-in-out"
+            >
+              <Button className="cursor-pointer">Take Exam</Button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

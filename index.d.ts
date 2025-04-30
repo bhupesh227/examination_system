@@ -122,3 +122,12 @@ interface CreateExamFeedbackParams{
     answers: AnswerRecord[];
     feedbackId?: string;
 }
+
+interface SubmittedExamProps {
+    id: string;
+    userId: string;
+    examId: string;
+    answers: AnswerRecord[];
+    score: number;
+    submittedAt: string;
+}

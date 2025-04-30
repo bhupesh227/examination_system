@@ -312,8 +312,8 @@
     @apply absolute bottom-full mb-1 hidden group-hover:flex px-2 py-1 text-xs text-white bg-gray-700 rounded-md shadow-md;
   }
 
-  .card-interview {
-    @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+  .card-exam {
+    @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-5 justify-between;
 
     .badge-text {
       @apply text-sm font-semibold capitalize;
@@ -323,7 +323,11 @@
   .section-feedback {
     @apply flex flex-col gap-8 max-w-5xl mx-auto max-sm:px-4 text-lg leading-7;
   }
-  
+
+  .result-layout {
+    @apply flex mx-auto max-w-7xl flex-col gap-6 mt-12 px-16 max-sm:px-4 max-sm:my-8;
+  }
+
   .dots{
     display: inline-block;
     width: 30px;
