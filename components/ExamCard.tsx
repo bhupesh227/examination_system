@@ -44,6 +44,13 @@ const ExamCard = async({
     const formattedDate = dayjs(
        createdAt 
     ).format("MMM D, YYYY");
+
+    const percentage = feedback && totalMarks
+      ? feedback.totalScore 
+      : null;
+
+    const hasPassed = percentage !== null ? percentage >= 33 : null;
+
   return (
     <div className='card-border w-[360px] max-sm:w-full min-h-96 p-2 bg-white rounded-br-lg shadow-md'>
       <div className='card-exam'>
@@ -53,9 +60,14 @@ const ExamCard = async({
             
           </div>
 
-          <div className={`absolute top-0 left-0 w-fit px-4 py-2 rounded-br-lg z-10 bg-teal-600`}>
-            <p className="badge-text font-medium text-white capitalize">Passing Marks:{passingMarks || ""}</p>
-          </div>
+          {feedback && (
+            <div className={`absolute top-0 left-0 w-fit px-4 py-2 rounded-br-lg z-10 ${hasPassed ? 'bg-green-500' : 'bg-red-500'}`}>
+              <p className="badge-text font-medium text-white capitalize">
+                {hasPassed ? 'Pass' : 'Fail'}
+              </p>
+            </div>
+          )}
+
           <Image
             src='/elevated-view-laptop-stationeries-blue-backdrop.jpg'
             alt="cover-image"
@@ -107,11 +119,14 @@ const ExamCard = async({
               alt="duration icon"
             />
             <p>{duration} min</p>
+            <div>
+              
+            </div>
           </div>
 
           <p className="line-clamp-2 mt-2 text-center">
             {feedback ?(
-              <span className='text-teal-600 font-semibold'>ou haven&apos;t taken this Exam yet. Take it now to improve your skills.</span>
+              <span className='text-teal-600 font-semibold'>Checkout your feedback and result by clicking below given link.</span>
             ) : (
               <span className='text-teal-600 font-semibold'>{description}</span>
             )}

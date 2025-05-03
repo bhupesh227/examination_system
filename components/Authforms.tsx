@@ -134,7 +134,7 @@ const Authforms = ({type}:{type:FormType}) => {
                         label="Email"
                         placeholder="Enter your email"
                         type="email"
-                        description='This is your email'
+                        description=''
                     />
                     <FormField
                         control={form.control}
@@ -142,7 +142,7 @@ const Authforms = ({type}:{type:FormType}) => {
                         label="Password"
                         placeholder="Enter your password"
                         type="password"
-                        description='This is your password'
+                        description=''
                     />
                     {!LogIn && (
                         <FormField
