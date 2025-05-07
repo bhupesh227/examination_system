@@ -1,14 +1,11 @@
 "use client"
 import React, { useState } from 'react'
 import { MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, NavbarButton, NavbarHead, NavbarLogo, NavBody, NavItems } from './ui/ResisableNavbar';
-import { usePathname, useRouter } from 'next/navigation';
-import { LogOutSession } from '@/lib/actions/auth.action';
-import { toast } from 'sonner';
+import { usePathname, } from 'next/navigation';
+
 
 import Avatars from './Avatars';
 import { adminNavItems, studentNavItems, teacherNavItems } from '@/constants';
-
-
 
 const Navbar = ({user}:{user:UserInfo}) => {
     const navItems =
@@ -21,22 +18,8 @@ const Navbar = ({user}:{user:UserInfo}) => {
                   : [];
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const pathname = usePathname();
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
     const isAuthPage = pathname === "/sign-in" || pathname === "/sign-up";
-    const handleLogOut = async () => {
-        try {
-            setIsLoading(true);
-            await LogOutSession();
-            toast.success("Logged out successfully.");
-            router.push("/sign-in");
-        } catch (error) {
-            console.error("Logout error:", error);
-            toast.error("Logout failed. Please try again.");
-        }finally{
-            setIsLoading(false);
-        }
-    }
+    
   return (
     <div className="relative w-full">
       <NavbarHead>
@@ -57,7 +40,11 @@ const Navbar = ({user}:{user:UserInfo}) => {
             ):(
                 <>
                     <Avatars userId={user.id} userName={user.username} currentAvatar={user.avatarURL}/>
-                    <NavbarButton variant="destructive" disabled={isLoading} onClick={handleLogOut}>LogOut</NavbarButton>
+                    <NavbarButton variant="destructive"  href='/my-profile' className='rounded-full'>
+                      
+                          <span className="block">Profile</span>
+                      
+                    </NavbarButton>
                 </>
             )}
             
@@ -106,7 +93,9 @@ const Navbar = ({user}:{user:UserInfo}) => {
                 </>
               ):(
                 <>
-                    <NavbarButton variant="destructive" disabled={isLoading} className='w-full' onClick={handleLogOut}>LogOut</NavbarButton>
+                  <NavbarButton variant="destructive"  href='/my-profile' className='rounded-full'>
+                    <span className="block">Profile</span>
+                  </NavbarButton>
                 </>
               )}
             </div>

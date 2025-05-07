@@ -338,6 +338,38 @@
   .list {
     @apply text-dark-100 text-xl mb-1 font-semibold ;
   }
+
+  .profile {
+    @apply flex flex-col gap-16 lg:flex-row mt-10;
+  }
+
+  .profile .id-card {
+    @apply flex flex-col h-fit max-lg:items-center max-lg:justify-center lg:sticky lg:top-10;
+  }
+
+  .profile .id-card .inner {
+    @apply gradient-blue relative w-full rounded-[20px] border border-dark-300 p-5 sm:w-[512px];
+  }
+
+  .profile .id-card .badge {
+    @apply absolute -top-10 left-1/2 z-10 h-28 w-20 -translate-x-1/2 rounded-b-full bg-[#464F6F] shadow-lg;
+  }
+
+  .profile .id-card .badge-inner {
+    @apply absolute bottom-3.5 left-1/2 h-3 w-10 -translate-x-1/2 rounded-full bg-[#1E2230];
+  }
+
+  .profile .id-card .validity {
+    @apply mt-7 border-t border-dotted border-neutral-800 pt-5;
+  }
+
+  .profile .id-card .validity p {
+    @apply text-center font-serif text-xs tracking-wider text-gray-400;
+  }
+
+  .profile .logout {
+    @apply w-full mt-4 bg-green-500 text-white font-bold hover:bg-blue-100 ;
+  }
 }
 
 @utility dark-gradient {
@@ -369,6 +401,10 @@
 
 @utility blue-gradient {
   @apply bg-gradient-to-l from-[#FFFFFF] to-[#CAC5FE];
+}
+
+@utility gradient-blue {
+  background-image: linear-gradient(180deg, #232839 0%, #12141d 100%);
 }
 
 @utility flex-center {

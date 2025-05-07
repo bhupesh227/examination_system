@@ -63,3 +63,19 @@ export async function getLatestExamForStudent(
     ...doc.data(),
   })) as ExamFormInfoProps[];
 }
+interface GetTotalExamsGivenByStudentParams{
+  userId: string;
+}
+// get total number of exams given by a student
+export async function getTotalExamsGivenByStudent(
+  params: GetTotalExamsGivenByStudentParams
+): Promise<number> {
+  const { userId } = params;
+
+  const examsGiven = await db
+    .collection("submittedExams")
+    .where("userId", "==", userId)
+    .get();
+
+  return examsGiven.size;
+}
