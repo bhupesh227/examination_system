@@ -13,6 +13,16 @@ export async function getTotalTeachers(): Promise<number> {
   return snapshot.size;
 }
 
+export async function getTotalNoOfAdminExams(): Promise<number> {
+  const snapshot = await db.collection("createdExams").where("role", "==", "admin").get();
+  return snapshot.size;
+}
+
+export async function getTotalNoOfTeacherExams(): Promise<number> {
+  const snapshot = await db.collection("createdExams").where("role", "==", "teacher").get();
+  return snapshot.size;
+}
+
 // Fetch exams created by admin
 export async function getAdminCreatedExams(): Promise<ExamFormInfoProps[]> {
   const snapshot = await db

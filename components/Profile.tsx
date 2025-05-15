@@ -9,9 +9,11 @@ import { Button } from './ui/button';
 interface ProfileProps {
     user: User;
     totalExamsGiven: number;
+    adminTotalExams?: number;
+    teacherExamsCreated?: number;
   }
 
-const Profile = ({ user, totalExamsGiven }: ProfileProps) => {
+const Profile = ({ user, totalExamsGiven,adminTotalExams,teacherExamsCreated }: ProfileProps) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const handleLogOut = async () => {
@@ -66,23 +68,34 @@ const Profile = ({ user, totalExamsGiven }: ProfileProps) => {
             <div className="mt-5 flex items-center gap-2">
               <p className="text-lg text-light-100">Role :</p>
               <p className="text-2xl font-semibold text-white">
-                {user.role}
+                {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
               </p>
             </div>
              
             <div className='mt-5 flex items-center gap-2'>
                 <p className='text-lg text-light-400'>Created At:</p>
                 <p className='text-light-100'>
-                    {user.createdAt}
+                  {user.createdAt}
                 </p>
             </div>
 
-            <div className='mt-5 flex items-center gap-2'>
+            {user.role === "student" ? (
+              <div className='mt-5 flex items-center gap-2'>
                 <p className='text-lg text-light-400'>Total Exams Taken:</p>
-                <p className='text-light-100'>
-                    {totalExamsGiven}
-                </p>
-            </div>
+                <p className='text-light-100'>{totalExamsGiven}</p>
+              </div>
+            ) : user.role === "teacher" ? (
+              <div className='mt-5 flex items-center gap-2'>
+                <p className='text-lg text-light-400'>Exams You Created:</p>
+                <p className='text-light-100'>{teacherExamsCreated}</p>
+              </div>
+            ) : user.role === "admin" && (
+              <div className='mt-5 flex items-center gap-2'>
+                <p className='text-lg text-light-400'>Total Admin Exams:</p>
+                <p className='text-light-100'>{adminTotalExams}</p>
+              </div>
+            )}
+            
 
             <div className="validity ">
               <p >

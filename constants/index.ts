@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const studentNavItems = [
   {name: "Home ", link: "/"},
+  {name: "Dashboard", link: "/student-dashboard"},
   { name: "All Exam", link: "/AllExams" },
   { name: "About Us", link: "/About-Us" }
 ];
@@ -52,6 +53,24 @@ export const AdminSideBarLinks = [
     text: "AllGenerated Exams",
     img: "/icons/allexam.svg",
     route: "/admin-dashboard/AllGeneratedExams",
+  },
+]
+
+export const StudentSidebarLinks = [
+  {
+    text: "Student Dashboard",
+    img: "/icons/dashboard.svg",
+    route: "/student-dashboard",
+  },
+  {
+    text: "All Exams",
+    img: "/icons/allexam.svg",
+    route: "/AllExams",
+  },
+  {
+    text: "Ranking",
+    img: "/icons/ranking.svg",
+    route: "/Ranking",
   },
 ]
 

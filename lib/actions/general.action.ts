@@ -79,3 +79,37 @@ export async function getTotalExamsGivenByStudent(
 
   return examsGiven.size;
 }
+
+export async function getAllStudentsRanking(): Promise<{ userId: string; name: string; totalMarks: number ; email: string}[]> {
+  
+  const feedbackSnapshot = await db.collection("examFeedback").get();
+
+  
+  const rankingMap = new Map<string, number>();
+  feedbackSnapshot.forEach(doc => {
+    const data = doc.data();
+    const userId = data.userId as string;
+    const totalScore = data.totalScore as number;
+    rankingMap.set(userId, (rankingMap.get(userId) || 0) + totalScore);
+  });
+
+  // Build the ranking array. For each userId, fetch the user's name from the "users" collection.
+  const rankingArray: { userId: string; name: string; totalMarks: number ; email:string }[] = [];
+  
+  for (const [userId, totalMarks] of rankingMap.entries()) {
+    try {
+      const userDoc = await db.collection("users").doc(userId).get();
+      const name = userDoc.exists ? (userDoc.data()?.username as string || userId) : userId;
+      const email = userDoc.exists ? (userDoc.data()?.email as string || userId) : userId;
+      
+      rankingArray.push({ userId , name, totalMarks, email });
+    } catch (error) {
+      // Fallback to userId if fetching user fails
+      rankingArray.push({userId, name: userId, totalMarks, email: userId });
+    }
+  }
+
+  // Sort in descending order by totalMarks
+  rankingArray.sort((a, b) => b.totalMarks - a.totalMarks);
+  return rankingArray;
+}
