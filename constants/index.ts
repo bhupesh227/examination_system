@@ -31,9 +31,9 @@ export const SideBarLinks = [
     route: "/teacher-dashboard/create-exams",
   },
   {
-    text: "Generated Exams",
+    text: "Your Generated Exams",
     img: "/icons/allexam.svg",
-    route: "/teacher-dashboard/GeneratedExams",
+    route: "/teacher-dashboard/YourGeneratedExams",
   },
   
 ];

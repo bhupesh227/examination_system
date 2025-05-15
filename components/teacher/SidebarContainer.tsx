@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import Sidebar from "./Sidebar";
 import { PanelRightOpen } from "lucide-react";
+import Sidebar from "./Sidebar";
 
 interface SidebarContainerProps {
     username: string;
@@ -25,18 +25,13 @@ const SidebarContainer = ({ username, email }: SidebarContainerProps) => {
     return (
         <>
             
-            <div className="md:hidden p-2">
+            <div className=" p-0">
                 <button
                     onClick={() => setOpen(true)}
-                    className="p-2 bg-teal-600 text-white rounded"
+                    className="p-2 bg-teal-600 text-white rounded font-serif flex flex-col justify-center items-center gap-2"
                 >
                     <PanelRightOpen />
                 </button>
-            </div>
-
-           
-            <div className="hidden md:block">
-                <Sidebar username={username} email={email} />
             </div>
 
             <AnimatePresence>
@@ -59,7 +54,7 @@ const SidebarContainer = ({ username, email }: SidebarContainerProps) => {
                             exit="hidden"
                             variants={sidebarVariants}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg rounded-2xl"
+                            className="fixed inset-y-0 left-0 z-50 w-64 md:w-100 bg-white shadow-lg rounded-2xl"
                         >
                             <div className="p-4 h-full overflow-y-auto pb-6">
                                 <button

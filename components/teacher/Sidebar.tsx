@@ -43,8 +43,8 @@ const Sidebar = ({username,email}:SidebarProps) => {
                   })}
               </div>
           </div>
-          <div className="my-8 flex w-full flex-row gap-2 rounded-full border border-light-400 px-6 py-2 shadow-sm">
-                <div className="flex flex-col">
+          <div className="my-8 flex w-full flex-row justify-center items-center gap-2 rounded-full border border-light-400 px-6 py-2 shadow-sm">
+                <div className="flex flex-col justify-center items-center">
                     <p className="font-semibold text-dark-200">{username}</p>
                     <p className="text-xs text-light-800">{email}</p>
                 </div>

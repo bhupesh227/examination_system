@@ -70,10 +70,6 @@ interface ExamCardProps{
     role: string;
     
 }
-interface teacherDashboardProps{
-    createdExam: ExamFormInfoProps[];
-    user : User | null;
-}
 
 interface RouteParams {
     params: Promise<Record<string, string>>;

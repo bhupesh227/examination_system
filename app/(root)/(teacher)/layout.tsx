@@ -15,8 +15,9 @@ const TeacherLayout = async({children}:{children:ReactNode}) => {
     }
   return (
         <>
-            <main className='flex min-h-screen w-full flex-row max-md:flex-col'>
+            <main className='flex min-h-screen w-full flex-col'>
               <SidebarContainer username={user.username} email={user.email} />
+              <div className='h-[1px] w-full bg-gray-600' />
               <div className='flex w-full flex-1 flex-col bg-light-300 p-1 xs:p-10 '>
                   {children}
               </div>
