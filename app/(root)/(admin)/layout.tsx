@@ -14,7 +14,9 @@ const AdminLayout = async({children}:{children:ReactNode}) => {
         <>
             <main className='flex min-h-screen w-full flex-col'>
               <AdminSidebarContainer username={user.username} email={user.email} />
-              <div className='flex w-full flex-1 flex-col bg-light-300 p-1 xs:p-10 '>
+              <div className='h-[1px] w-full bg-gray-600' />
+
+              <div className='flex w-full flex-1 flex-col bg-light-300 xs:p-10 '>
                   {children}
               </div>
           </main>

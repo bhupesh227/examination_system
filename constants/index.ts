@@ -50,7 +50,7 @@ export const AdminSideBarLinks = [
     route: "/admin-dashboard/create-exams",
   },
   {
-    text: "AllGenerated Exams",
+    text: "All Generated Exams",
     img: "/icons/allexam.svg",
     route: "/admin-dashboard/AllGeneratedExams",
   },

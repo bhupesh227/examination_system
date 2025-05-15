@@ -73,7 +73,7 @@ const EditExamForm = ({ examData }: EditExamFormProps) => {
   }, [examData, replace, form]);
 
   const onSubmit = async (values: ExamForm) => {
-    console.log("onSubmit called with:", values);
+    
     if (!examData) {
       toast.error("Exam data not loaded");
       return;
@@ -82,9 +82,8 @@ const EditExamForm = ({ examData }: EditExamFormProps) => {
       setSubmitting(true);
       const updatedData = { userId: examData.userId, ...values, role: values.role || "" };
       const result = await updateExamForm(examData.id, updatedData);
-      console.log("Update result:", result);
       toast.success(result?.message || "Exam updated successfully");
-      router.push(updatedData.role === "teacher" ? "/teacher-dashboard" : "/admin-dashboard");
+      router.push(examData.CurrentRole === "teacher" ? "/teacher-dashboard" : "/admin-dashboard");
     } catch (error) {
       toast.error("Failed to update exam");
       console.error("Error updating exam:", error);

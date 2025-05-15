@@ -25,12 +25,12 @@ const AdminSidebarContainer = ({ username, email }: AdminSidebarContainerProps) 
     return (
         <>
             
-            <div className=" p-2 mb-3">
+            <div className=" p-0">
                 <button
                     onClick={() => setOpen(true)}
                     className="p-2 bg-teal-600 text-white rounded font-serif flex flex-col justify-center items-center gap-2"
                 >
-                    <PanelRightOpen /> SideBar
+                    <PanelRightOpen />
                 </button>
             </div>
 

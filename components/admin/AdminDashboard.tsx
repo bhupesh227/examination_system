@@ -25,21 +25,22 @@ const AdminDashboard = async () => {
   const displayedTeacherExams = teacherExams.slice(0, 2); 
 
   return (
-    <div className="flex min-h-screen p-4 max-sm:p-0 flex-col gap-8">
-      <main className="flex-1 p-0">
+    <div className="flex min-h-screen max-sm:p-0 gap-8">
+      <div className="w-[1px] bg-gray-600 max-sm:hidden"></div>
+      
+      <main className="flex-1 p-6">
         <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
 
-        {/* Metrics */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="p-4 bg-white rounded shadow">
+          <div className="p-4 bg-gray-700 rounded shadow">
             <h2 className="text-xl font-semibold mb-2">Total Students</h2>
             <p className="text-3xl font-bold">{totalStudents}</p>
           </div>
-          <div className="p-4 bg-white rounded shadow">
+          <div className="p-4 bg-gray-700 rounded shadow">
             <h2 className="text-xl font-semibold mb-2">Total Teachers</h2>
             <p className="text-3xl font-bold">{totalTeachers}</p>
           </div>
-          <div className="p-4 bg-white rounded shadow">
+          <div className="p-4 bg-gray-700 rounded shadow">
             <h2 className="text-xl font-semibold mb-2">Admin Exams</h2>
             <p className="text-3xl font-bold">{adminExams.length}</p>
           </div>
@@ -68,7 +69,7 @@ const AdminDashboard = async () => {
                 ))}
               </div>
               {hasMoreAdminExams && (
-                <div className="mt-4">
+                <div className="mt-4 flex justify-end">
                   <Link
                     href="/admin-dashboard/AllGeneratedExams"
                     className="text-teal-600 hover:underline"
@@ -79,7 +80,7 @@ const AdminDashboard = async () => {
               )}
             </>
           ) : (
-            <p>No exams created by admin yet.</p>
+            <p className="ml-3 text-amber-200">No exams created by admin yet.</p>
           )}
         </section>
 
@@ -106,7 +107,7 @@ const AdminDashboard = async () => {
                 ))}
               </div>
               {hasMoreTeacherExams && (
-                <div className="mt-4">
+                <div className="mt-4 flex justify-center">
                   <Link
                     href="/admin-dashboard/AllGeneratedExams"
                     className="text-teal-600 hover:underline"
@@ -117,7 +118,7 @@ const AdminDashboard = async () => {
               )}
             </>
           ) : (
-            <p>No exams created by teachers yet.</p>
+            <p className="ml-3 text-amber-200">No exams created by teachers yet.</p>
           )}
         </section>
       </main>
