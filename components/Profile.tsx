@@ -52,7 +52,7 @@ const Profile = ({ user, totalExamsGiven,adminTotalExams,teacherExamsCreated }: 
 
            
               
-            <Button type="submit" variant="destructive" className="logout" onClick={handleLogOut} disabled={isLoading}>
+            <Button type="submit" variant="destructive" className="logout cursor-pointer" onClick={handleLogOut} disabled={isLoading}>
                 Logout
             </Button>
              
@@ -107,22 +107,6 @@ const Profile = ({ user, totalExamsGiven,adminTotalExams,teacherExamsCreated }: 
           
           
         </div>
-
-        {/* <div className="flex-1">
-          {success &&
-            (borrowedBooks.length > 0 ? (
-              <BookList
-                title="Borrowed Books"
-                books={borrowedBooks}
-                isBorrowed={true}
-              />
-            ) : (
-              <NotFound
-                title="No Borrowed Books"
-                description="You haven't borrowed any books yet. Go to the library to borrow books."
-              />
-            ))}
-        </div> */}
       </section>
     </>
   )

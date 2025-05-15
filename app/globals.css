@@ -185,11 +185,11 @@
   }
   
   .btn-addquestion {
-    @apply !w-full bg-orange-500 hover:bg-blue-400  !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+    @apply !w-full bg-orange-200 hover:bg-primary-200  !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
   }
 
   .btn-updateexam{
-    @apply !w-full bg-green-600 hover:bg-blue-400 text-shadow-dark-100! !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
+    @apply !w-full bg-green-300 hover:bg-primary-200 text-shadow-dark-100! !rounded-full !min-h-10 !font-bold !px-5 cursor-pointer;
   }
   .card-border {
     @apply border-gradient p-0.5 rounded-2xl w-fit;

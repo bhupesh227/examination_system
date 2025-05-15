@@ -25,6 +25,9 @@ const examSchema = z.object({
           message: "Options must be unique",
         }),
       answer: z.string().min(1, "Answer is required"),
+    }).refine((q) => q.options.includes(q.answer), {
+      message: "Answer must be one of the provided options",
+      path: ["answer"],
     })
   ),
   role: z.string().optional(),
@@ -104,19 +107,46 @@ const EditExamForm = ({ examData }: EditExamFormProps) => {
     }
   };
 
+  const handleAddQuestion = () => {
+    const input = window.prompt("How many options for this new question?", "2");
+    const num = input ? parseInt(input, 10) : 0;
+    if (isNaN(num) || num < 2) {
+      toast.error("Please enter a valid number (at least 2).");
+      return;
+    }
+    const newOptions = Array.from({ length: num }, () => "");
+    append({ question: "", options: newOptions, answer: "" });
+      // jump to the newly added question
+    setCurrentQuestionIndex(fields.length);
+  };
+
+
+  function getErrorMessages(errors: any): string[] {
+    const messages: string[] = [];
+    const traverse = (obj: any) => {
+      if (obj?.message) {
+        messages.push(obj.message);
+      }
+      if (typeof obj === "object") {
+        Object.values(obj).forEach((value) => traverse(value));
+      }
+    };
+    traverse(errors);
+    return messages;
+  }
+
   return (
     <div className="exam-card-border md:w-full py-4 md:ml-8 px-2">
       <h1 className="text-3xl font-bold mb-6">Edit Exam</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit, (errors) => {
-            Object.values(errors).forEach((error: any) => {
-              if (error?.message) {
-                toast.error(error.message, {
+            const messages = getErrorMessages(errors);
+            messages.forEach((message) => {
+                toast.error(message, {
                   description: "Please check your input",
                   duration: 3000,
                 });
-              }
             });
           })}
           className="w-full space-y-6 mt-4 form"
@@ -212,12 +242,7 @@ const EditExamForm = ({ examData }: EditExamFormProps) => {
                             <button
                                 type="button"
                                 className=" btn-addquestion text-dark-200"
-                                onClick={() => {
-                                    append({ question: "New Question", options: ["Option 1", "Option 2"], answer: "Option 1" });
-                                setTimeout(() => {
-                                    setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-                                }, 0);
-                                }}
+                                onClick={handleAddQuestion}
                             >
                                 Add Question
                             </button>

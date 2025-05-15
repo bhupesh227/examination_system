@@ -56,7 +56,7 @@ const StudentDashboard = async() => {
                         {topRanking.map((student, index) => (
                             <tr key={index} className="border-b">
                             <td className="p-2">{index + 1}</td>
-                            <td className="p-2">{student.name}</td>
+                            <td className="p-2 capitalize">{student.name}</td>
                             <td className="p-2">{student.totalMarks}</td>
                             </tr>
                         ))}
