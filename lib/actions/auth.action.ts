@@ -9,13 +9,30 @@ export async function SignUpUser(data: SignUpParams){
     try {
         const userRecord = await db.collection("users").doc(uid).get();
         if (userRecord.exists) {
+          if (!password) {
             return {
-                success: false,
-                message: "User already exists"
-            }
+                success: true,
+                message: "Google account already exists. Proceeding with sign-in.",
+            };
+          }
+          return {
+              success: false,
+              message: "User already exists"
+          }
         }
-        const avatarURL = "/avatardefault.jpg";
+        let avatarURL = "/avatardefault.jpg";
         const role = "student";
+        if (!password) {
+          try {
+            const authUser = await auth.getUser(uid);
+            if (authUser.photoURL) {
+              avatarURL = authUser.photoURL;
+            }
+          } catch (photoError) {
+            console.error("Error getting user photo:", photoError);
+            
+          }
+        }
         await db.collection("users").doc(uid).set({
             username,
             email,
