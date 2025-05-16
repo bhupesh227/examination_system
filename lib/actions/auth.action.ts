@@ -43,7 +43,7 @@ export async function SignUpUser(data: SignUpParams){
         });
         return {
             success: true,
-            message: password ? "User created successfully" : "User signed in successfully",
+            message: password ? "User created successfully" : "Google account created successfully.",
         };
         
     } catch (error: unknown) {
@@ -97,6 +97,19 @@ export async function LogInUser(data: LogInParams){
                 message: "User not found"
             }
         }
+
+        // Check Auth provider
+        const firestoreUser = await db.collection("users").doc(userRecord.uid).get();
+        const userData = firestoreUser.data();
+        const isGoogleUser = userData?.authProvider === "google";
+
+        // Skip email verification check for Google users as they're already verified
+        if (!userRecord.emailVerified && !isGoogleUser) {
+          return {
+            success: false,
+            message: "Please verify your email before signing in.",
+          };
+        }
         await setSessionCookie(idToken);
         return {
             success: true,
@@ -111,6 +124,7 @@ export async function LogInUser(data: LogInParams){
         }
     }
 }
+
 export async function getCurrentUser(): Promise<User | null> {
     const cookieStore = await cookies();
   
@@ -125,7 +139,20 @@ export async function getCurrentUser(): Promise<User | null> {
         .doc(decodedClaims.uid)
         .get();
       if (!userRecord.exists) return null;
-  
+
+      const userData = userRecord.data();
+      const isGoogleUser = userData?.authProvider === "google";
+      
+      // Get the user from Auth to check email verification
+      const authUser = await auth.getUser(decodedClaims.uid);
+      
+      // Skip email verification check for Google users
+      if (!authUser.emailVerified && !isGoogleUser) {
+        // Clear the session cookie
+        cookieStore.delete("session");
+        return null;
+      }
+
       return {
         ...userRecord.data(),
         id: userRecord.id,
