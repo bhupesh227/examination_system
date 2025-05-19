@@ -258,7 +258,7 @@ export default function ClientExamBody({
             <h2 className="text-lg font-semibold mb-4">
               Question {currentQIndex + 1} of {questions.length}
             </h2>
-            <p className="mb-6">{currentQuestion.question}</p>
+            <p className="mb-6 text-dark-200">{currentQuestion.question}</p>
 
             <div className="grid grid-cols-2 gap-4">
               {currentQuestion.options.map((opt: string, idx: number) => (

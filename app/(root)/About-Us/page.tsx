@@ -74,13 +74,13 @@ const page = () => {
         </div>
         <div className="space-y-4">
           <h3 className="text-2xl font-semibold text-blue-900">
-            Meet the Developer
+            Meet the Developers
           </h3>
           <p className="text-gray-800">
-            Hi, we are Bhupesh, Sumit, Manish, Chandan, and Shubham — the creators of ExamDo. I built this platform to
+            Hi, We are Bhupesh, Sumit, Manish, Chandan, and Shubham — the creators of ExamDo. We built this platform to
             streamline online assessments and provide actionable feedback to
             learners everywhere. With a passion for education and software
-            design, I&apos;m committed to continual improvement and innovation.
+            design, We are committed to continual improvement and innovation.
           </p>
           <div className="flex space-x-4 justify-center md:justify-start">
             <a

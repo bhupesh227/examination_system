@@ -66,7 +66,7 @@ const Ranking = async () => {
           {hasMissing && (
             <tr
               key={`${user.id}-missing`}
-              className="border-b bg-red-100"
+              className="border-b bg-red-400"
             >
               <td className="p-2">{rankingWithScore.length + 1}</td>
               <td className="p-2">{user.username} (You)</td>
