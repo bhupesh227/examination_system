@@ -77,7 +77,7 @@ const page = () => {
             Meet the Developer
           </h3>
           <p className="text-gray-800">
-            Hi, I&apos;m Bhupesh — the creator of ExamDo. I built this platform to
+            Hi, we are Bhupesh, Sumit, Manish, Chandan, and Shubham — the creators of ExamDo. I built this platform to
             streamline online assessments and provide actionable feedback to
             learners everywhere. With a passion for education and software
             design, I&apos;m committed to continual improvement and innovation.

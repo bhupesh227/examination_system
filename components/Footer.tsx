@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="mt-6 sm:p-4 border-t border-dark-200">
         <div className="flex justify-between items-center max-sm:flex-col-reverse">
             <p className="text-blue-400 text-semibold">
-            © {currentYear} Bhupesh Bora. All rights reserved.
+            © {currentYear} Examination System. All rights reserved.
             </p>
         
             <Link 
